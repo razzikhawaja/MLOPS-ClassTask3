@@ -46,10 +46,9 @@ pipeline {
         }
     }
 
-     post {
-        always {
-            // Clean up Docker images after the build
-            sh 'docker rmi $(docker images -q)'
-        }
+    post {
+    always {
+        sh '/usr/bin/docker rmi $(docker images -q)'
     }
+}
 }
