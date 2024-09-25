@@ -2,15 +2,14 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB_USERNAME = credentials('dockerhub-credenials')  
-        DOCKER_HUB_PASSWORD = credentials('dockerhub-credentials')  
+        DOCKER_HUB_USERNAME = credentials('dockerhub-username') 
+        DOCKER_HUB_PASSWORD = credentials('dockerhub-password')  
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                // Clone your code repository
-                git branch: 'main', url: 'https://github.com/razzikhawaja/MLOPS-ClassTask3.git' // Replace with your repo URL
+                git branch: 'main', url: 'https://github.com/razzikhawaja/MLOPS-ClassTask3.git'
             }
         }
 
@@ -49,8 +48,8 @@ pipeline {
 
     post {
         always {
-            // Clean up docker images after the build
-            sh 'docker rmi $(docker images -q)'
+            // Clean up images after the build is done
+            sh "docker rmi $(docker images -q)"
         }
     }
 }
