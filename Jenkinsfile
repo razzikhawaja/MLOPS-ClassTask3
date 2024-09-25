@@ -46,10 +46,10 @@ pipeline {
         }
     }
 
-    post {
+     post {
         always {
-            // Clean up images after the build is done
-            sh "docker rmi $(docker images -q)"
+            // Clean up Docker images after the build
+            sh 'docker rmi $(docker images -q)'
         }
     }
 }
